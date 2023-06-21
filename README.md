@@ -1,6 +1,6 @@
 # notebooks
 
-This GitHub repo contains assorted PowerShell code examples published in .NET Interactive Notebook files.
+This GitHub repo contains assorted PowerShell code examples published in Jupyter/Polyglot Notebook files.
 
 The basis of this was heavily inspired by the [MMS](https://mmsmoa.com) presentation materials by Scott Corio 
 ([@scottcorio](https://twitter.com/ScottCorio)) and Nathan Ziehnert ([@theznerd](https://twitter.com/theznerd)).
