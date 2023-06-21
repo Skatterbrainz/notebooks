@@ -1,0 +1,6 @@
+<?xml version='1.0'?>
+<computers>
+	<computer>dc01</computer>
+	<computer>db01</computer>
+	<computer>fs01</computer>
+</computers>

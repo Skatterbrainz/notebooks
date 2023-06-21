@@ -1,0 +1,20 @@
+[
+	{
+		"name": "DC01",
+		"cpu": 2,
+		"memory": 8,
+		"os": "Windows Server 2022"
+	},
+	{
+		"name": "FS01",
+		"cpu": 4,
+		"memory": 16,
+		"os": "Windows Server 2019"
+	},
+	{
+		"name": "DB01",
+		"cpu": 4,
+		"memory": 32,
+		"os": "Windows Server 2022"
+	}
+]
