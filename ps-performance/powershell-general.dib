@@ -1,6 +1,6 @@
 #!meta
 
-{"kernelInfo":{"defaultKernelName":"csharp","items":[{"name":"csharp","aliases":["c#","C#"],"languageName":"C#"},{"name":"vscode","languageName":null,"aliases":["frontend"]}]}}
+{"kernelInfo":{"defaultKernelName":"csharp","items":[{"aliases":["C#","c#"],"languageName":"C#","name":"csharp"},{"aliases":["frontend"],"name":"vscode"}]}}
 
 #!markdown
 
@@ -12,73 +12,6 @@ Heavily inspired by the MMS session by Scott Corio and Nathan Ziehnert
 
 #!markdown
 
-### Evaluated Condition Tests
-
-#!markdown
-
-#### If / ElseIf
-
-#!pwsh
-
-[hashtable]$obj = @{FN = 'David'; LN = 'Stein'; Dept = 'Consulting'}
-
-Measure-Command {
-	for ($i = 0; $i -lt 10000; $i++) {
-		if ($obj.FN -like 'John*' -and $obj.Dept -eq 'Marketing') {
-			$x = 1
-		} elseif ($obj.FN -like 'Beth*' -or $obj.Dept -eq 'Support') {
-			$x = 2
-		} elseif ($obj.FN -like 'Dav*' -and $obj.Dept -eq 'Consulting') {
-			$x = 3
-		} else {
-			$x = 4
-		}
-	}
-} | Select-Object -ExpandProperty TotalMilliseconds
-
-#!markdown
-
-#### Switch
-
-#!pwsh
-
-[hashtable]$obj = @{FN = 'David'; LN = 'Stein'; Dept = 'Consulting'}
-
-Measure-Command -Expression {
-	for ($i = 0; $i -lt 10000; $i++) {
-		switch ($obj) {
-			{($obj.FN -like 'John*' -and $obj.Dept -eq 'Marketing')} { $x = 1 }
-			{($obj.FN -like 'Beth*' -or $obj.Dept -eq 'Support')} { $x = 2 }
-			{($obj.FN -like 'Dav*' -and $obj.Dept -eq 'Consulting')} { $x = 3 }
-			default { $x = 4 }
-		}
-	}
-} | Select-Object -ExpandProperty TotalMilliseconds
-
-#!markdown
-
-### Arrays and Lists
-
-#!markdown
-
-#### Array Union
-
-#!pwsh
-
-using namespace System.Collections
-using namespace System.Collections.Generic
-using namespace System.Collections.Concurrent
-
-$randoms = Get-Random -Count 100000
-$list = [List[int]]::new()
-
-Measure-Command {
-	$randoms | ForEach-Object { $list.Add($_) }
-	$list.Sort()
-} | Select-Object -ExpandProperty TotalMilliseconds
-
-#!markdown
-
 #### Foreach-Object Parallel
 
 #!pwsh
@@ -86,7 +19,15 @@ Measure-Command {
 Measure-Command {
 	1..1000 | ForEach-Object -Parallel {
 		$_ * 2
-	} -ThrottleLimit 5
+	} -ThrottleLimit 10
+} | Select-Object -ExpandProperty TotalMilliseconds
+
+#!pwsh
+
+Measure-Command {
+	1..1000 | Foreach-Object {
+		$_ * 2
+	}
 } | Select-Object -ExpandProperty TotalMilliseconds
 
 #!pwsh
