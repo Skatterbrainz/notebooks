@@ -2,6 +2,21 @@
 .DESCRIPTION
 	Export AzureAD(EntraID) user accounts with PowerShell and MS Graph API
 #>
+
+# import module
+Import-Module Microsoft.Graph.Authentication
+
+# connect to graph api
+# query for all users
+# query for users by filter
+# query for one user by Id
+# query for one user by UPN
+
+<#
+****************************************
+NOTE: Move this to another screen !!!!
+****************************************
+
 param (
 	[parameter()][string]$Id,
 	[parameter()][string]$DisplayName,
@@ -29,3 +44,4 @@ if (![string]::IsNullOrEmpty($Id)) {
 	Get-MgUser -All
 	
 }
+#>
