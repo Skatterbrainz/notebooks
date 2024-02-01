@@ -14,7 +14,6 @@ Command | Description
 --|--
 CTRL+R | search console history
 cd ~ | change to user profile directory
-hostname | get computer name
 $env:computername | get computer name
-whoami | get your username
 $env:username | get your username
+Get-Alias | list all defined command aliases
