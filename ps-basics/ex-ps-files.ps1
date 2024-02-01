@@ -3,9 +3,11 @@
 	Demonstrate searching for files by various methods.
 	Possible uses include cleaning up old files, renaming as backups,etc.
 .PARAMETER FolderPath
-	Folder to scan for files (default is path where script resides)
+	Optional. Folder to scan for files (default path is where the script file resides)
 .PARAMETER Filter
-	File name pattern to limit searches (default is *.*)
+	Optional. File name pattern to limit searches (default filter is '*.*')
+.PARAMETER Recurse
+	Optional. Include sub-folders in the search scope
 .EXAMPLE
 	.\ex-ps-files.ps1 -Path
 #>
@@ -15,17 +17,14 @@ param (
 	[parameter()][Alias("Subtree")][switch]$Recurse
 )
 
-# Show default properties. Also explain display output vs. pipeline output
-Get-ChildItem -Path $Path -Filter $Filter -File
-
-# Show all properties
-#Get-ChildItem -Path $Path -Filter $Filter -File | Select-Object *
-
-# Filter return data
-#Get-ChildItem -Path $Path -Filter $Filter -File | Select-Object Name,FullName,Length,CreationTime,LastWriteTime,Extension
-
 # Add -Recurse parameter
-#Get-ChildItem -Path $Path -Filter $Filter -File -Recurse:$Recurse | Select-Object Name,FullName,Length,CreationTime,LastWriteTime,Extension
+try {
+	Get-ChildItem -Path $Path -Filter $Filter -File -Recurse:$Recurse -ErrorAction Stop |
+		Select-Object Name,FullName,Length,CreationTime,LastWriteTime,Extension
+}
+catch {
+	Write-Error $_.Exception.Message
+}
 
 <#
 # show splatting example
